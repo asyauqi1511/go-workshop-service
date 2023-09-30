@@ -5,11 +5,12 @@ import (
 	"fmt"
 
 	"github.com/asyauqi1511/go-workshop-service/internal/entity"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 const (
 	// dataSourceFormat <username>:<password>@tcp(<hostname>:<port>)/<database_name> .
-	dataSourceFormat = "%s:%s@tcp(%s:%d)/%s"
+	dataSourceFormat = "%s:%s@tcp(%s:%d)/%s?parseTime=true"
 
 	// driverName is kind of sql we will use.
 	driverName = "mysql"

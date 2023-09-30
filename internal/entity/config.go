@@ -1,8 +1,8 @@
 package entity
 
 type AppConfig struct {
-	DB    DBConfig
-	Redis RedisConfig
+	DB    DBConfig    `yaml:"db"`
+	Redis RedisConfig `yaml:"redis"`
 }
 
 type DBConfig struct {

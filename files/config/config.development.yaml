@@ -1,0 +1,11 @@
+db:
+  hostname: "localhost"
+  port: 3306
+  username: root
+  password: ""
+  database_name: "go_workshop_db"
+
+redis:
+  hostname: "localhost"
+  port: 6379
+  password: ""
