@@ -8,7 +8,6 @@ import (
 func (h Handler) RegisterUser(c *gin.Context) (interface{}, error) {
 	var (
 		request entity.UserRegisterParam
-		ctx     = c.Request.Context()
 	)
 
 	err := c.ShouldBindJSON(&request)
@@ -16,7 +15,7 @@ func (h Handler) RegisterUser(c *gin.Context) (interface{}, error) {
 		return nil, err
 	}
 
-	err = h.userUsecase.RegisterUser(ctx, request)
+	err = h.userUsecase.RegisterUser(c, request)
 	if err != nil {
 		return nil, err
 	}

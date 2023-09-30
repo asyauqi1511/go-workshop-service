@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -15,7 +14,7 @@ func Auth(userRes user.Module) func(c *gin.Context) {
 		username := c.GetHeader(constants.HeaderUsername)
 		password := c.GetHeader(constants.HeaderPassword)
 
-		user, err := userRes.GetAuth(c.Request.Context(), username, password)
+		user, err := userRes.GetAuth(c, username, password)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": err.Error(),
@@ -32,7 +31,6 @@ func Auth(userRes user.Module) func(c *gin.Context) {
 
 		c.Set(constants.UserIDTag, user.UserID)
 		c.Set(constants.UserRoleTag, user.Role)
-		fmt.Println(user)
 
 		c.Next()
 	}
@@ -42,7 +40,7 @@ func HandleHTTP(handle func(c *gin.Context) (any, error)) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		data, err := handle(c)
 		if err != nil {
-			log.Printf("Error: %v", err)
+			log.Printf("Error: %v\n", err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "internal server error",
 			})
