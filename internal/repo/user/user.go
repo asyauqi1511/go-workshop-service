@@ -22,7 +22,7 @@ func (m Module) GetAuth(ctx context.Context, username, password string) (entity.
 	}
 
 	err = row.Scan(&result.UserID, &result.Username, &result.Role, &result.CreateTime, &result.UpdateTime)
-	if err != nil {
+	if err != nil && err != sql.ErrNoRows {
 		return result, errorwrapper.Wrap(err)
 	}
 

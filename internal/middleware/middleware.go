@@ -19,6 +19,7 @@ func Auth(userRes user.Module) func(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": err.Error(),
 			})
+			c.Abort()
 			return
 		}
 
@@ -26,6 +27,7 @@ func Auth(userRes user.Module) func(c *gin.Context) {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"message": "unauthorized",
 			})
+			c.Abort()
 			return
 		}
 
@@ -44,6 +46,7 @@ func HandleHTTP(handle func(c *gin.Context) (any, error)) func(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"message": "internal server error",
 			})
+			c.Abort()
 			return
 		}
 
